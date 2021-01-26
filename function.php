@@ -76,14 +76,9 @@ function prosesLogin($username, $password)
   $login = false;
   $user = [
     [
-      'username' => 'admin',
-      'password' => '123123'
-
-    ],
-    [
-      'username' => 'rsaswab2',
+      'username' => 'swab',
       'password' => 'rsaswab123'
-    ]
+    ],
   ];
 
   foreach ($user as $value) {
