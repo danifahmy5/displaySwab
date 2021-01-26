@@ -1,21 +1,7 @@
 <?php
+session_start();
 include 'function.php';
-$update   = isset($_POST['update']) ? $_POST['update'] : null;
-$json     = getSwab();
-$dataSwab = json_decode($json, true);
-$responseUpdate = null;
-
-if ($update) {
-  $id           = isset($_POST['id']) ? $_POST['id'] : null;
-  $status       = isset($_POST['postStatus']) ? $_POST['postStatus'] : null;
-  $buktiTranfer = isset($_POST['buktiTranfer']) ? $_POST['buktiTranfer'] : null;
-
-  $updateSwab = updateSwab($id, $status, $buktiTranfer);
-  header("Refresh:0");
-}
-
-
-
+include 'proses.php'
 ?>
 
 <!doctype html>
@@ -27,8 +13,8 @@ if ($update) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/icon/logo.png">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="assets/style/bootstrap.css">
+  <link rel="stylesheet" href="assets/style/dataTables.bootstrap4.min.css">
 
   <title>Data Swab</title>
   <style>
@@ -56,10 +42,56 @@ if ($update) {
 </head>
 
 <body class="bg-dark">
+  <?php $responseLogin = isset($_GET['prosesLogin']) ? $_GET['prosesLogin'] : null; ?>
+
+  <?php if (!$login) : ?>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 mx-auto text-center" style="margin-top: 10%;">
+          <h3 class="bg-primary text-white p-2">Login Swab/Antigen</h3>
+          <?php if ($responseLogin == 'success') : ?>
+            <h5 class='badge badge-success mt-1' style="width: 50%;">Login Berhasil</h5>
+          <?php endif ?>
+          <?php if ($responseLogin == 'failed') : ?>
+            <h5 class='badge badge-danger mt-1' style="width: 50%;">Login gagal</h5>
+          <?php endif ?>
+          <?php if ($responseLogin == 'logout') : ?>
+            <h5 class='badge badge-success mt-1' style="width: 50%;">Berhasil Logout</h5>
+          <?php endif ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 mx-auto mt-3">
+          <div class="card">
+            <div class="card-body">
+              <form method="POST">
+                <input type="hidden" name="prosesLogin" value="1">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Username</label>
+                  <input type="text" name="username" required class="form-control" placeholder="Masukkan username">
+                  <small id="emailHelp" class="form-text text-muted">Username yang sudah terdaftar</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input name="password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php die;
+  endif ?>
   <div class="mx-3">
     <div class="card my-2">
       <div class="card-header bg-dark text-white">
         <h4 class="text-center"><img class="mr-2" src="assets/icon/logo.png" width="50"> DATA SWAB / ANTIGEN RS AISYIYAH BOJONEGORO</h4>
+        <form action="" method="POST">
+          <input type="hidden" value="logout" name="logout">
+          <button type="submit" class="btn btn-danger"> Logout</button>
+        </form>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -221,13 +253,11 @@ if ($update) {
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/jquery-3.5.1.js"></script>
+  <script src="assets/js/jquery.dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap4.min.js"></script>
   <script>
-    let update = '<?= $responseUpdate ?>';
     $(document).ready(function() {
       alert
       $('table').DataTable();

@@ -1,4 +1,5 @@
 <?php
+$base_url = "http://localhost/displayDataSwab/";
 
 function getSwab()
 {
@@ -69,4 +70,31 @@ function getBgStatus($status)
       null;
       break;
   }
+}
+function prosesLogin($username, $password)
+{
+  $login = false;
+  $user = [
+    [
+      'username' => 'admin',
+      'password' => '123123'
+
+    ],
+    [
+      'username' => 'rsaswab2',
+      'password' => 'rsaswab123'
+    ]
+  ];
+
+  foreach ($user as $value) {
+    if ($value['username'] == (string)$username && $value['password'] == (string)$password) {
+      $login = true;
+    }
+  }
+
+  if ($login) {
+    $_SESSION['login'] = $login;
+  }
+
+  return $login;
 }
