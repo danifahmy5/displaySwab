@@ -15,7 +15,7 @@ include 'proses.php'
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="assets/style/bootstrap.css">
   <link rel="stylesheet" href="assets/style/dataTables.bootstrap4.min.css">
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <title>Data Swab</title>
   <style>
     .zoom {
@@ -84,6 +84,7 @@ include 'proses.php'
     </div>
   <?php die;
   endif ?>
+
   <div class="mx-3">
     <div class="card my-2">
       <div class="card-header bg-dark text-white">
@@ -252,15 +253,27 @@ include 'proses.php'
       </div>
     </div>
   </div>
-
+  <?php $prosesUpdate = isset($_GET['prosesUpdate']) ? $_GET['prosesUpdate'] : null; ?>
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/jquery-3.5.1.js"></script>
   <script src="assets/js/jquery.dataTables.min.js"></script>
   <script src="assets/js/dataTables.bootstrap4.min.js"></script>
   <script>
+    let prosesUpdate = '<?= $prosesUpdate ?>';
     $(document).ready(function() {
-      alert
       $('table').DataTable();
+      if (prosesUpdate == 'success')
+        Swal.fire(
+          'Success!',
+          'Update status berhasil!',
+          'success'
+        )
+      else if(prosesUpdate == 'error')
+        Swal.fire(
+          'Error!',
+          'Gagal update status!',
+          'error'
+        )
     });
 
     setTimeout(function() {

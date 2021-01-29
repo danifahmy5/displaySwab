@@ -26,18 +26,14 @@ function getSwab()
 function updateSwab($id, $status, $buktiTranfer)
 {
   $dataUpdate = [
-    'buktitransfer' => $buktiTranfer,
+    'buktitransfer' => $buktiTranfer ? $buktiTranfer : null,
     'status'        => $status
-  ];
-
+  ]; 
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
     CURLOPT_URL => 'http://36.94.8.228:5000/his/about/updateReg?regid=' . $id,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
+    CURLOPT_RETURNTRANSFER => true,  
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'PUT',
@@ -47,10 +43,9 @@ function updateSwab($id, $status, $buktiTranfer)
     ),
   ));
 
-  $response = curl_exec($curl);
-
-  curl_close($curl);
-  return $response;
+  $response = curl_exec($curl); 
+  curl_close($curl);  
+  return json_decode($response, true);
 }
 
 function getBgStatus($status)
