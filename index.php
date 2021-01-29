@@ -15,7 +15,6 @@ include 'proses.php'
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="assets/style/bootstrap.css">
   <link rel="stylesheet" href="assets/style/dataTables.bootstrap4.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <title>Data Swab</title>
   <style>
     .zoom {
@@ -212,10 +211,10 @@ include 'proses.php'
           </div>
           <div class="bg-light m-1 row">
             <div class="col-sm-6">
-              <img src="" id="ktp" class="rounded m-1">
+              <img src="" id="ktp" class="rounded m-1 img-thumbnail">
             </div>
             <div class="col-sm-6">
-              <img src="" id="bukti" class="rounded m-2">
+              <img src="" id="bukti" class="rounded m-2 img-thumbnail">
             </div>
           </div>
         </div>
@@ -258,6 +257,8 @@ include 'proses.php'
   <script src="assets/js/jquery-3.5.1.js"></script>
   <script src="assets/js/jquery.dataTables.min.js"></script>
   <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+  <script src="assets/js/sweetalert.js"></script>
+
   <script>
     let prosesUpdate = '<?= $prosesUpdate ?>';
     $(document).ready(function() {
@@ -277,7 +278,7 @@ include 'proses.php'
     });
 
     setTimeout(function() {
-      window.location.reload()
+      window.location.replace("<?= $base_url ?>"); 
     }, 120000)
 
     function _detailSwab(id, rm, nama, alamat, tgl, genre, ktp, tf, status) {
