@@ -94,6 +94,14 @@ include 'proses.php'
         </form>
       </div> 
       <div class="card-body">
+      <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+        <a class="btn btn-success active"> 
+          <input type="radio" name="options" id="option1" autocomplete="off" checked> Swab Antigen
+        </a>
+        <a class="btn btn-success" href="<?= $base_url ?>dataLab.php"> 
+          <input type="radio" name="options" id="option2" autocomplete="off"> Laboratorium
+        </a> 
+      </div>
         <div class="table-responsive">
           <table id="example" class="table table-striped table-bordered table-sm" style="width:100%">
             <thead class="bg-dark text-white">

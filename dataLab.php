@@ -94,6 +94,14 @@ include 'proses.php'
         </form>
       </div>
       <div class="card-body">
+      <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+        <a class="btn btn-success" href="<?= $base_url ?>"> 
+          <input type="radio" name="options" id="option1" autocomplete="off" checked> Swab Antigen
+        </a>
+        <a class="btn btn-success active"> 
+          <input type="radio" name="options" id="option2" autocomplete="off"> Laboratorium
+        </a> 
+      </div>
         <div class="table-responsive">
           <table id="example" class="table table-striped table-bordered table-sm" style="width:100%">
             <thead class="bg-dark text-white">
@@ -148,30 +156,30 @@ include 'proses.php'
                           )" href="#">Detail</a>
                         </li>
                         <li><button class="dropdown-item" onclick="_getDataSwab('<?= $value['idol']; ?>', '<?= $value['buktitransfer'] ?>')">Edit</button></li>
-                        <?php if(!$value['pcr']) : ?>
-                        <li><button class="dropdown-item" onclick="_uploadPdf('<?= $value['id']; ?>')">Upload Hasil</button></li>
-                        
+                        <?php if (!$value['pcr']) : ?>
+                          <li><button class="dropdown-item" onclick="_uploadPdf('<?= $value['id']; ?>')">Upload Hasil</button></li>
+
                         <?php endif ?>
-                        <?php if($value['pcr']) : ?>
-                        <li>
-                          <form action="" method="post">
-                            <input type="hidden" name="proses" value="deletePdf">
-                            <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                            <button type="submit" class="dropdown-item">Hapus Hasil</button>
-                          </form>
-                        </li>
-                        <li>
-                          <form target="_blank" action="<?= $base_url.'pdf.php'; ?>" method="post"> 
-                            <input type="hidden" name="base64" value="<?= $value['pcr']; ?>"> 
-                            <button type="submit" class="dropdown-item">Lihat Hasil</button>
-                          </form>
-                        </li> 
-                        <li>
-                          <form action="<?= $base_url.'downloadPdf.php'; ?>" method="post"> 
-                            <input type="hidden" name="base64" value="<?= $value['pcr']; ?>"> 
-                            <button type="submit" class="dropdown-item">Download Hasil</button>
-                          </form>
-                        </li>  
+                        <?php if ($value['pcr']) : ?>
+                          <li>
+                            <form action="" method="post">
+                              <input type="hidden" name="proses" value="deletePdf">
+                              <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                              <button type="submit" class="dropdown-item">Hapus Hasil</button>
+                            </form>
+                          </li>
+                          <li>
+                            <form target="_blank" action="<?= $base_url . 'pdf.php'; ?>" method="post">
+                              <input type="hidden" name="base64" value="<?= $value['pcr']; ?>">
+                              <button type="submit" class="dropdown-item">Lihat Hasil</button>
+                            </form>
+                          </li>
+                          <li>
+                            <form action="<?= $base_url . 'downloadPdf.php'; ?>" method="post">
+                              <input type="hidden" name="base64" value="<?= $value['pcr']; ?>">
+                              <button type="submit" class="dropdown-item">Download Hasil</button>
+                            </form>
+                          </li>
                         <?php endif ?>
                       </ul>
                     </div>
@@ -352,7 +360,7 @@ include 'proses.php'
     });
 
     setTimeout(function() {
-      window.location.replace("<?= $base_url.'dataLab.php' ?>");
+      window.location.replace("<?= $base_url . 'dataLab.php' ?>");
     }, 120000)
 
     function _detailSwab(id, rm, nama, alamat, tgl, genre, ktp, tf, status) {
