@@ -340,6 +340,13 @@ include 'proses.php'
             'success'
           )
           break;
+        case 'delete-success':
+          Swal.fire(
+            'Success!',
+            'Berhasil upload hasil swab!',
+            'success'
+          )
+          break;
 
       }
     });
