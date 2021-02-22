@@ -40,7 +40,7 @@ include 'proses.php'
   </style>
 </head>
 
-<body class="bg-dark"> 
+<body class="bg-dark">
   <?php $responseLogin = isset($_GET['prosesLogin']) ? $_GET['prosesLogin'] : null; ?>
 
   <?php if (!$login) : ?>
@@ -87,12 +87,12 @@ include 'proses.php'
   <div class="mx-3">
     <div class="card my-2">
       <div class="card-header bg-dark text-white">
-        <h4 class="text-center"><img class="mr-2" src="assets/icon/logo.png" width="50"> DATA SWAB / ANTIGEN RS AISYIYAH BOJONEGORO</h4>
+        <h4 class="text-center"><img class="mr-2" src="assets/icon/logo.png" width="50"> DATA SWAB / PCR LABORAT RS AISYIYAH BOJONEGORO</h4>
         <form action="" method="POST">
           <input type="hidden" value="logout" name="proses">
           <button type="submit" class="btn btn-danger"> Logout</button>
         </form>
-      </div> 
+      </div>
       <div class="card-body">
         <div class="table-responsive">
           <table id="example" class="table table-striped table-bordered table-sm" style="width:100%">
@@ -112,11 +112,11 @@ include 'proses.php'
             </thead>
             <tbody>
               <?php
-              foreach ($dataSwab['_embedded']['pxRJAntiPCRs'] as $value) :
+              foreach ($dataSwab['_embedded']['pxRJPCRALLs'] as $value) :
                 $date = date_create($value['tgl']);
                 $dateFormat = date_format($date, 'd F, Y')
               ?>
-                <tr>
+                <tr class="<?= $value['pcr'] ? 'bg-info text-white' : ''; ?>">
                   <td><?= $value['id']; ?></td>
                   <td><?= $value['regnum']; ?></td>
                   <td><?= $value['nama']; ?></td>
@@ -130,7 +130,7 @@ include 'proses.php'
                   <td align="center"><?= $value['buktitransfer'] ? '<img width="100" class="zoom rounded" src="' . $value['buktitransfer'] . '" alt="">' : 'kosong' ?></td>
                   <td align="center">
                     <div class="btn-group ">
-                      <a type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a type="button" class="btn <?= $value['pcr'] ? 'btn-light' : 'btn-primary'; ?>  btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Action
                       </a>
                       <ul class="dropdown-menu">
@@ -147,8 +147,12 @@ include 'proses.php'
                             '<?= $value['statustransaksirj']; ?>', 
                           )" href="#">Detail</a>
                         </li>
-                        <li><a class="dropdown-item" onclick="_getDataSwab('<?= $value['idol']; ?>', '<?= $value['buktitransfer'] ?>')" href="#">Edit</a></li>
-                        <li><a class="dropdown-item" onclick="_uploadPdf('<?= $value['id']; ?>')" href="#">Upload Hasil</a></li>
+                        <li><button class="dropdown-item" onclick="_getDataSwab('<?= $value['idol']; ?>', '<?= $value['buktitransfer'] ?>')">Edit</button></li>
+                        <?php if(!$value['pcr']) : ?>
+                        <li><button class="dropdown-item" onclick="_uploadPdf('<?= $value['id']; ?>')">Upload Hasil</button></li>
+                        
+                        <?php endif ?>
+                        <?php if($value['pcr']) : ?>
                         <li>
                           <form action="" method="post">
                             <input type="hidden" name="proses" value="deletePdf">
@@ -156,6 +160,19 @@ include 'proses.php'
                             <button type="submit" class="dropdown-item">Hapus Hasil</button>
                           </form>
                         </li>
+                        <li>
+                          <form target="_blank" action="<?= $base_url.'pdf.php'; ?>" method="post"> 
+                            <input type="hidden" name="base64" value="<?= $value['pcr']; ?>"> 
+                            <button type="submit" class="dropdown-item">Lihat Hasil</button>
+                          </form>
+                        </li> 
+                        <li>
+                          <form action="<?= $base_url.'downloadPdf.php'; ?>" method="post"> 
+                            <input type="hidden" name="base64" value="<?= $value['pcr']; ?>"> 
+                            <button type="submit" class="dropdown-item">Download Hasil</button>
+                          </form>
+                        </li>  
+                        <?php endif ?>
                       </ul>
                     </div>
                   </td>
@@ -318,9 +335,9 @@ include 'proses.php'
           break;
         case 'succces-upload-hasil':
           Swal.fire(
-            'Error!',
+            'Success!',
             'Berhasil upload hasil swab!',
-            'error'
+            'success'
           )
           break;
 
@@ -328,7 +345,7 @@ include 'proses.php'
     });
 
     setTimeout(function() {
-      window.location.replace("<?= $base_url ?>");
+      window.location.replace("<?= $base_url.'dataLab.php' ?>");
     }, 120000)
 
     function _detailSwab(id, rm, nama, alamat, tgl, genre, ktp, tf, status) {
