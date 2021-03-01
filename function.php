@@ -1,5 +1,5 @@
 <?php
-$base_url = "http://localhost/displayDataSwab/";
+$base_url = "http://localhost/displaySwab/";
 $file     = 'pdf/filePdf.pdf';
  
 function getSwab()
