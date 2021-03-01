@@ -5,12 +5,12 @@ $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri_segments = explode('/', $uri_path); 
 $json = [];
 
-if ($uri_segments[1] == 'dataLab.php') {
+if ($uri_segments[2] == 'dataLab.php') {
   $json = getSwabPcr(); 
 }else {
   $json = getSwab(); 
 }
-
+ 
 
 $dataSwab    = json_decode($json, true);
 // post detect
@@ -26,9 +26,17 @@ switch ($proses) {
     // run function swab
     $responseSwab = updateSwab($id, $status, $buktiTranfer);
     if ($responseSwab['id']) {
-      header("Location:" . $base_url . "?notif=success");
+      if ($uri_segments[2] == 'dataLab.php') {
+        header("Location:" . $base_url . "dataLab.php?notif=success"); 
+      }else { 
+        header("Location:" . $base_url . "?notif=success"); 
+      }
     } else {
-      header("Location:" . $base_url . "?notif=error");
+      if ($uri_segments[2] == 'dataLab.php') {
+        header("Location:" . $base_url . "dataLab.php?notif=error"); 
+      }else { 
+        header("Location:" . $base_url . "?notif=error"); 
+      } 
     }
     break;
   case 'login': //proses login
