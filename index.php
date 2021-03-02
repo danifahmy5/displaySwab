@@ -40,7 +40,7 @@ include 'proses.php'
   </style>
 </head>
 
-<body class="bg-dark"> 
+<body class="bg-dark">
   <?php $responseLogin = isset($_GET['prosesLogin']) ? $_GET['prosesLogin'] : null; ?>
 
   <?php if (!$login) : ?>
@@ -87,21 +87,21 @@ include 'proses.php'
   <div class="mx-3">
     <div class="card my-2">
       <div class="card-header bg-dark text-white">
-        <h4 class="text-center"><img class="mr-2" src="assets/icon/logo.png" width="50"> DATA SWAB / ANTIGEN RS AISYIYAH BOJONEGORO</h4>
+        <h4 class="text-center"><img class="mr-2" src="assets/icon/logo.png" width="50"> DATA SWAB PCR DAN ANTIGEN</h4>
         <form action="" method="POST">
           <input type="hidden" value="logout" name="proses">
           <button type="submit" class="btn btn-danger"> Logout</button>
         </form>
-      </div> 
-      <div class="card-body">
-      <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-        <a class="btn btn-success active"> 
-          <input type="radio" name="options" id="option1" autocomplete="off" checked> Swab Antigen
-        </a>
-        <a class="btn btn-success" href="<?= $base_url ?>dataLab.php"> 
-          <input type="radio" name="options" id="option2" autocomplete="off"> Laboratorium
-        </a> 
       </div>
+      <div class="card-body">
+        <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+          <a class="btn btn-success active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Swab Antigen
+          </a>
+          <a class="btn btn-success" href="<?= $base_url ?>dataLab.php">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Kasir
+          </a>
+        </div>
         <div class="table-responsive">
           <table id="example" class="table table-striped table-bordered table-sm" style="width:100%">
             <thead class="bg-dark text-white">
@@ -301,7 +301,11 @@ include 'proses.php'
   <script>
     let notif = '<?= $notif ?>';
     $(document).ready(function() {
-      $('table').DataTable();
+      $('#example').DataTable({
+        "order": [
+          [0, "desc"]
+        ]
+      });
       switch (notif) {
         case 'success':
           Swal.fire(
