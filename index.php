@@ -156,14 +156,7 @@ include 'proses.php'
                           )" href="#">Detail</a>
                         </li>
                         <li><a class="dropdown-item" onclick="_getDataSwab('<?= $value['idol']; ?>', '<?= $value['buktitransfer'] ?>')" href="#">Edit</a></li>
-                        <li><a class="dropdown-item" onclick="_uploadPdf('<?= $value['id']; ?>')" href="#">Upload Hasil</a></li>
-                        <li>
-                          <form action="" method="post">
-                            <input type="hidden" name="proses" value="deletePdf">
-                            <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                            <button type="submit" class="dropdown-item">Hapus Hasil</button>
-                          </form>
-                        </li>
+
                       </ul>
                     </div>
                   </td>
@@ -256,6 +249,7 @@ include 'proses.php'
               <select class="form-control" required name="postStatus">
                 <option value="">-- Pilih Status --</option>
                 <option value="4">Pembayaran Berhasil </option>
+                <option value="6">Pembayaran Tunai </option>
                 <option value="5">Pembayaran Gagal </option>
               </select>
             </div>

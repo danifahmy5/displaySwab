@@ -130,6 +130,7 @@ include 'proses.php'
               <tr>
                 <th class="text-center">ID</th>
                 <th class="text-center">RM</th>
+                <th class="text-center" width="70">Jenis</th>
                 <th class="text-center">Nama</th>
                 <th class="text-center" class="d-flex">Alamat</th>
                 <th width="130" class="text-center">Tanggal</th>
@@ -149,6 +150,7 @@ include 'proses.php'
                 <tr class="<?= $value['pcr'] ? 'bg-info text-white' : ''; ?>">
                   <td><?= $value['id']; ?></td>
                   <td><?= $value['regnum']; ?></td>
+                  <td class="text-center"><?= $value['sublayanan']; ?></td>
                   <td><?= $value['nama']; ?></td>
                   <td><?= $value['addr']; ?></td>
                   <td align="center"><?= $dateFormat; ?></td>
@@ -169,7 +171,6 @@ include 'proses.php'
                     } else {
                       echo 'kosong';
                     }
-
                     ?>
 
                   </td>
@@ -193,7 +194,6 @@ include 'proses.php'
                             '<?= $value['statustransaksirj']; ?>', 
                           )" href="#">Detail</a>
                         </li>
-                        <li><button class="dropdown-item" onclick="_getDataSwab('<?= $value['idol']; ?>', '<?= $value['buktitransfer'] ?>')">Edit</button></li>
                         <?php if (!$value['pcr']) : ?>
                           <li><button class="dropdown-item" onclick="_uploadPdf('<?= $value['id']; ?>')">Upload Hasil</button></li>
 
