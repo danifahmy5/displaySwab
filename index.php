@@ -95,11 +95,11 @@ include 'proses.php'
       </div>
       <div class="card-body">
         <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-          <a class="btn btn-success active">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked> Swab Antigen
+          <a class="btn btn-success active" href="<?= $base_url ?>">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Kasir
           </a>
-          <a class="btn btn-success" href="<?= $base_url ?>dataLab.php">
-            <input type="radio" name="options" id="option2" autocomplete="off"> Kasir
+          <a class="btn btn-success " href="<?= $base_url ?>dataLab.php">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Laboratorium
           </a>
         </div>
         <div class="table-responsive">

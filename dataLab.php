@@ -17,6 +17,28 @@ include 'proses.php'
   <link rel="stylesheet" href="assets/style/dataTables.bootstrap4.min.css">
   <title>Data Swab</title>
   <style>
+    @media print {
+      table {
+        -webkit-print-color-adjust: exact
+      }
+
+      body * {
+        visibility: hidden;
+      }
+
+      .print,
+      .print * {
+        visibility: visible;
+      }
+
+      .print {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+    }
+
     .zoom {
       transition: transform .2s;
       /* Animation */
@@ -96,10 +118,10 @@ include 'proses.php'
       <div class="card-body">
         <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
           <a class="btn btn-success " href="<?= $base_url ?>">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked> Swab Antigen
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Kasir
           </a>
           <a class="btn btn-success active" href="<?= $base_url ?>dataLab.php">
-            <input type="radio" name="options" id="option2" autocomplete="off"> Kasir
+            <input type="radio" name="options" id="option2" autocomplete="off"> Laboratorium
           </a>
         </div>
         <div class="table-responsive">
@@ -134,7 +156,24 @@ include 'proses.php'
                   <td align="center">
                     <?= $value['statustransaksirj'] ? '<span class="badge ' . getBgStatus($value['idstatustransaksirj']) . '">' . $value['statustransaksirj'] . '</span>' : 'Kosong' ?>
                   </td>
-                  <td align="center"><?= $value['ktp'] ? '<img width="100" class="zoom rounded" src="' . $value['ktp'] . '" alt="">' : 'kosong' ?></td>
+                  <td align="center"></td>
+                  <td align="center">
+                    <?php
+                    if ($value['ktp']) { ?>
+                      <form target="_blank" action="<?= $base_url ?>print.php" method="post">
+                        <input type="hidden" name="base_64" value="<?= $value['ktp'] ?>">
+                        <button style="background: transparent; border: none;" type="submit">
+                          <img width="100" class="zoom rounded" src="<?= $value['ktp'] ?>" />
+                        </button>
+                      </form>
+                    <?php
+                    } else {
+                      echo 'kosong';
+                    }
+
+                    ?>
+
+                  </td>
                   <td align="center"><?= $value['buktitransfer'] ? '<img width="100" class="zoom rounded" src="' . $value['buktitransfer'] . '" alt="">' : 'kosong' ?></td>
                   <td align="center">
                     <div class="btn-group ">
@@ -355,7 +394,7 @@ include 'proses.php'
         case 'delete-success':
           Swal.fire(
             'Success!',
-            'Berhasil upload hasil swab!',
+            'Berhasil menghapus hasil swab!',
             'success'
           )
           break;
