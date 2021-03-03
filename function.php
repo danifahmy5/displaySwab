@@ -56,7 +56,7 @@ function updateSwab($id, $status, $buktiTranfer)
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://36.94.8.228:5000/his/about/updateReg?regid=' . $id,
+    CURLOPT_URL => 'http://192.168.1.200:5000/his/about/updateReg?regid=' . $id,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
