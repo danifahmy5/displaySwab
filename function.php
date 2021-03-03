@@ -1,6 +1,6 @@
 <?php
-// $base_url = "http://192.168.1.8/displaySwab/";
-$base_url = "http://localhost/displaySwab/";
+$base_url = "http://192.168.1.8/displaySwab/";
+// $base_url = "http://localhost/displaySwab/";
 $file     = 'pdf/filePdf.pdf';
 
 function getSwab()
