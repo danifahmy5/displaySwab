@@ -156,7 +156,6 @@ include 'proses.php'
                   <td align="center">
                     <?= $value['statustransaksirj'] ? '<span class="badge ' . getBgStatus($value['idstatustransaksirj']) . '">' . $value['statustransaksirj'] . '</span>' : 'Kosong' ?>
                   </td>
-                  <td align="center"></td>
                   <td align="center">
                     <?php
                     if ($value['ktp']) { ?>
