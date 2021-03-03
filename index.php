@@ -108,6 +108,7 @@ include 'proses.php'
               <tr>
                 <th class="text-center">ID</th>
                 <th class="text-center">RM</th>
+                <th class="text-center" width="70">Jenis</th>
                 <th class="text-center">Nama</th>
                 <th class="text-center" class="d-flex">Alamat</th>
                 <th width="130" class="text-center">Tanggal</th>
@@ -127,6 +128,7 @@ include 'proses.php'
                 <tr>
                   <td><?= $value['id']; ?></td>
                   <td><?= $value['regnum']; ?></td>
+                  <td><?= $value['sublayanan']; ?></td>
                   <td><?= $value['nama']; ?></td>
                   <td><?= $value['addr']; ?></td>
                   <td align="center"><?= $dateFormat; ?></td>
@@ -134,7 +136,22 @@ include 'proses.php'
                   <td align="center">
                     <?= $value['statustransaksirj'] ? '<span class="badge ' . getBgStatus($value['idstatustransaksirj']) . '">' . $value['statustransaksirj'] . '</span>' : 'Kosong' ?>
                   </td>
-                  <td align="center"><?= $value['ktp'] ? '<img width="100" class="zoom rounded" src="' . $value['ktp'] . '" alt="">' : 'kosong' ?></td>
+                  <td align="center">
+                    <?php
+                    if ($value['ktp']) { ?>
+                      <form target="_blank" action="<?= $base_url ?>print.php" method="post">
+                        <input type="hidden" name="base_64" value="<?= $value['ktp'] ?>">
+                        <button style="background: transparent; border: none;" type="submit">
+                          <img width="100" class="zoom rounded" src="<?= $value['ktp'] ?>" />
+                        </button>
+                      </form>
+                    <?php
+                    } else {
+                      echo 'kosong';
+                    }
+                    ?>
+
+                  </td>
                   <td align="center"><?= $value['buktitransfer'] ? '<img width="100" class="zoom rounded" src="' . $value['buktitransfer'] . '" alt="">' : 'kosong' ?></td>
                   <td align="center">
                     <div class="btn-group ">
