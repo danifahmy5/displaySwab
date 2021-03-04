@@ -130,9 +130,10 @@ include 'proses.php'
               <tr>
                 <th class="text-center">ID</th>
                 <th class="text-center">RM</th>
+                <th class="text-center">NIK</th>
                 <th class="text-center" width="70">Jenis</th>
                 <th class="text-center">Nama</th>
-                <th class="text-center" class="d-flex">Alamat</th>
+                <th class="text-center">Alamat</th>
                 <th width="130" class="text-center">Tanggal</th>
                 <th class="text-center">Genre</th>
                 <th class="text-center">Status</th>
@@ -150,6 +151,7 @@ include 'proses.php'
                 <tr class="<?= $value['pcr'] ? 'bg-info text-white' : ''; ?>">
                   <td><?= $value['id']; ?></td>
                   <td><?= $value['regnum']; ?></td>
+                  <td class="text-center"><?= $value['nik']; ?></td>
                   <td class="text-center"><?= $value['sublayanan']; ?></td>
                   <td><?= $value['nama']; ?></td>
                   <td><?= $value['addr']; ?></td>
